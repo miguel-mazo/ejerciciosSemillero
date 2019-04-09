@@ -1,0 +1,197 @@
+
+<h2>{{ header }}</h2>
+<!--<p>{{ nombre | uppercase }}</p>
+<p>{{ apellidos | uppercase }}</p>
+<p>{{ tipoIdentificacion | uppercase }}</p>-->
+
+<table>
+  <tr>
+    <td>Tipo de identificación</td>
+    <td>Número de identificación</td>        
+  </tr>
+  
+  <tr>
+    <td>
+      <select class="form-control" [(ngModel)]="persona.tipoIdentificacion">
+        <option value="CC">Cédula de ciudadanía</option>
+        <option value="TI">Tarjeta de identidad</option>
+      </select>
+    </td>
+
+    <td>
+      <input name="numID" id="numID" type="text" required class="form-control" [(ngModel)]="persona.numeroIdentificacion" placeholder="Número de identificación">
+    </td>        
+  </tr>
+
+  <tr>
+    <td>Nombres</td>
+    <td>Apellidos</td>
+  </tr>
+
+  <tr>
+    <td>
+      <input name="nombres" id="nombres" type="text" required class="form-control" [(ngModel)]="persona.nombre" placeholder="Nombres">
+    </td>
+
+    <td>
+      <input name="apellidos" id="apellidos" type="text" required class="form-control" [(ngModel)]="persona.apellido" placeholder="Apellidos">
+    </td>
+  </tr>
+
+  <tr>
+    <td>Número telefónico</td>
+    <td>Edad</td>
+  </tr>
+
+  <tr>
+    <td>
+      <input name="numtel" id="numtel" type="text" required class="form-control" [(ngModel)]="persona.numeroTelefonico" placeholder="Número telefónico">
+    </td>
+
+    <td>
+      <input name="edad" id="edad" type="text" required class="form-control" [(ngModel)]="persona.edad" placeholder="Edad">
+    </td>    
+  </tr>
+
+  <tr>
+    <td>Fecha de nacimiento</td>
+  </tr>
+
+  <tr>
+    <td>
+      <input name="fechaNac" id="fechaNac" type="text" required class="form-control" [(ngModel)]="persona.fechaNacimiento" placeholder="dd-mm-aa">
+    </td> 
+
+    <td>
+      <input type="checkbox" name="mayorEdad" [(ngModel)]="persona.mayorEdad" value="true"> Mayor de edad<br>
+    </td>
+  </tr>
+
+  <tr>
+    <td>Estado</td>
+    <td>Sexo</td>
+  </tr>
+
+  <tr>
+    <td>
+      <select class="form-control" [(ngModel)]="persona.estado">
+        <option value="soltero">Soltero</option>
+        <option value="unionLibre">Unión libre</option>
+        <option value="casado">Casado</option>
+        <option value="divorciado">Divorciado</option>
+        <option value="viudo">Viudo</option>
+      </select>
+    </td>
+
+    <td>      
+      <label>Masculino
+      <input name="sexo" type="radio" [(ngModel)]="persona.sexo" value="masculino" />
+      </label>
+      <label>Femenino
+      <input name="sexo" type="radio" [(ngModel)]="persona.sexo" value="femenino" />
+      </label>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>Roles</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>
+      <label>Comprador
+        <input name="roles" type="radio" [(ngModel)]="persona.rol" value="comprador" />
+        </label>
+        <label>Vendedor
+        <input name="roles" type="radio" [(ngModel)]="persona.rol" value="vendedor" />
+        </label>
+    </td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td></td>
+    <td align="right">
+      <input value="Ingresar" type="button" (click)="ingresar()">
+    </td>
+  </tr>
+  
+  <ng-template #empty></ng-template>
+
+  <pre>{{ persona | json }}</pre>
+
+</table>
+
+
+<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;border-color:#ddd;">
+    
+    <tr>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>N° Identificación</th>
+      <th>Tipo de identificación</th>
+      <th>Número telefónico</th>
+      <th>Edad</th>
+      <th>Estado</th>
+      <th>Fecha de Nacimiento</th>
+      <th>CRU</th>
+    </tr>
+
+    <td *ngIf ="personas.length>0; else empty">
+      <tr *ngFor ="let per of personas ">
+        {{ per.nombre | lowercase}}
+      </tr>
+    </td>
+
+    <td *ngIf ="personas.length>0; else empty">
+      <tr *ngFor ="let per of personas ">                
+        {{ per.apellido | lowercase}}                
+      </tr>
+    </td>
+
+    <td *ngIf ="personas.length>0; else empty">
+      <tr *ngFor ="let per of personas ">                
+        {{ per.numeroIdentificacion | lowercase}}                
+      </tr>
+    </td>
+
+    <td *ngIf ="personas.length>0; else empty">
+      <tr *ngFor ="let per of personas ">                
+        {{ per.tipoIdentificacion | lowercase}}                
+      </tr>
+    </td>
+
+    <td *ngIf ="personas.length>0; else empty">
+      <tr *ngFor ="let per of personas ">                
+        {{ per.numeroTelefonico | lowercase}}                
+      </tr>
+    </td>
+
+    <td *ngIf ="personas.length>0; else empty">
+      <tr *ngFor ="let per of personas ">                
+        {{ per.edad | lowercase}}                
+      </tr>
+    </td>
+
+    <td *ngIf ="personas.length>0; else empty">
+      <tr *ngFor ="let per of personas ">                
+        {{ per.estado | lowercase}}                
+      </tr>
+    </td>
+
+    <td *ngIf ="personas.length>0; else empty">
+      <tr *ngFor ="let per of personas ">                
+        {{ per.fechaNacimiento | lowercase}}                
+      </tr>
+    </td>
+
+    <td align="center" *ngIf ="personas.length>0; else empty">
+      <tr *ngFor ="let per of personas ">                
+        <input value="Editar" type="button">
+        <input value="Eliminar" type="button">
+        <input value="Consultar" type="button">             
+      </tr>
+    </td>
+
+  </table>
