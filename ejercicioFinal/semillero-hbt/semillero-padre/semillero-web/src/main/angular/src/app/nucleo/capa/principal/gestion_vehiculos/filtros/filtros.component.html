@@ -1,0 +1,81 @@
+<p>
+  filtros works!
+</p>
+
+<!--
+  <input value="Mostrar Formulario" type="button" (click)="mostrar()" />
+  <input value="Ocultar Formulario" type="button" (click)="ocultar()" />-->
+<input value={{mostrarFormulario}} disabled="true"/>
+
+<div [ngStyle]="{'background-color':'white'}">
+  <fieldset>
+    <legend>Gestionar vehículos</legend>  
+      <table>
+          <tr>
+            <td>Marcas</td>
+            <td></td>
+            <td></td>
+            <td>Líneas</td>        
+          </tr>
+          
+          <tr>
+            <td>
+              <select [(ngModel)]="idMarca" (change)="consultarLineas()">
+                <option *ngFor="let marca of marcas" [value]="marca.idMarca">{{marca.nombre}}</option>
+              </select>
+            </td>
+            
+            <td></td>
+            <td></td>
+            
+            <td>
+              <select [(ngModel)]="idLinea">
+                <option *ngFor="let linea of lineas" [value]="linea.idLinea">{{linea.nombre}}</option>
+              </select>
+            </td>        
+          </tr>
+        
+          <tr>
+            <td></td>
+            <td></td>
+            <td align="rigth">
+                <button (click)="consultar()">Consultar</button>
+            </td>
+          </tr>
+
+      </table>
+      
+      <div *ngIf="mostrarFormulario">          
+
+        <table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;border-color:#ddd;">
+  
+          <tr>
+            <th WIDTH="100" >Marca</th>
+            <th WIDTH="100" >Línea</th>
+            <th WIDTH="100" >Placa</th>
+            <th WIDTH="100" >Modelo</th>
+            <th WIDTH="100" >Cilindraje</th>
+            <th WIDTH="100" >+</th>
+          </tr>
+
+          <tr *ngFor="let vehiculo of listaVehiculosDTO">
+            <td WIDTH="100" >{{vehiculo.linea.marca.nombre}}</td>
+            <td WIDTH="100" >{{vehiculo.linea.nombre}}</td>
+            <td WIDTH="100" >
+                <input [(ngModel)]="vehiculo.placa"> 
+            </td>
+            <td WIDTH="100" >
+                <input [(ngModel)]="vehiculo.modelo"> 
+            </td>
+            <td WIDTH="100" >{{vehiculo.linea.cilindraje}}</td>
+            <td WIDTH="100" >
+              <button (click)="editar(vehiculo)">Editar</button>
+              <button (click)="borrar(vehiculo)">Borrar</button>
+            </td>
+          </tr>
+      
+        </table>            
+                  
+      </div>
+  </fieldset> 
+</div>
